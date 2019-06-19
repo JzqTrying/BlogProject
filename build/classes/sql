@@ -1,0 +1,40 @@
+CREATE DATABASE blog DEFAULT CHARACTER SET utf8;;
+
+create table user(
+ id int PRIMARY KEY AUTO_INCREMENT,
+ username VARCHAR(100),
+ password VARCHAR(100)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create table category(
+  id int PRIMARY KEY AUTO_INCREMENT,
+  name varchar(1000),
+  createDate datetime DEFAULT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create table blog(
+  id int PRIMARY KEY AUTO_INCREMENT,
+  cid int,
+  username varchar(100),
+  content varchar(1000),
+  createDate datetime DEFAULT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE article (
+  id int PRIMARY KEY AUTO_INCREMENT,
+  cid int,
+  title varchar(100),
+  count int,
+  createDate datetime DEFAULT NULL,
+  content varchar(10000),
+  CONSTRAINT fk_article_category FOREIGN KEY (cid) REFERENCES category(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create table areply(
+  id int PRIMARY KEY AUTO_INCREMENT,
+  aid int,
+  content varchar(1000),
+  username varchar(1000),
+  createDate datetime DEFAULT NULL,
+  CONSTRAINT fk_areply_article FOREIGN KEY (aid) REFERENCES article(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
